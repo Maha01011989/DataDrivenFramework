@@ -20,10 +20,8 @@ public class Driver {
             case "edge":
                 driver = new EdgeDriver();
                 return driver;
-
         }
         return driver;
-
     }
 
     public void closeBrowser() {

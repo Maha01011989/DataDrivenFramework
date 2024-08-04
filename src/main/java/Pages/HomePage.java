@@ -1,7 +1,6 @@
 package Pages;
 
 import Utils.ElementUtil;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 public class HomePage {
 
     WebDriver driver;
-
     ElementUtil elementUtil = new ElementUtil();
 
     public HomePage(WebDriver driver) {
@@ -20,8 +18,6 @@ public class HomePage {
 
     @FindBy(className = "et_pb_menu__logo")
     private WebElement headerLogo;
-
-    // private By headerLogo = By.className("et_pb_menu__logo");
 
     @FindBy(id = "idExample")
     private WebElement buttonID;
@@ -44,6 +40,10 @@ public class HomePage {
         elementUtil.doClick(buttonLink);
         System.out.println("button with Link is clicked");
     }
+    public void navigateToHomePage() {
+        driver.navigate().back();
+    }
+
 
 
 }
