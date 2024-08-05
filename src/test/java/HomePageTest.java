@@ -4,17 +4,30 @@ import org.testng.annotations.Test;
 
 public class HomePageTest extends BaseTest {
 
-    ReportUtil reportUtil=new ReportUtil();
-    @Test
+
+    @Test(testName = "Click Button with ID")
     public void clickButtonWithID() throws InterruptedException {
-        hm.clickButtonWithID();
-        hm.navigateToHomePage();
-        Thread.sleep(5000);
-        test.log(Status.PASS, "Clicked the ID button successfully");
+        try {
+            hm.clickButtonWithID();
+            test.log(Status.PASS, "Clicked the ID button successfully");
+        } catch (Exception e) {
+            test.log(Status.FAIL, "Button is not clicked successfully");
+            test.log(Status.INFO, "An exception occurred ");
+        }
+
     }
 
-    @Test
+    @Test(testName = "Click Button with link")
     public void clickButtonWithLink() {
-        hm.clickButtonWithLinkText();
+        try {
+            hm.clickButtonWithLinkText();
+            test.log(Status.PASS, "Clicked the link successfully");
+        } catch (Exception e) {
+            test.log(Status.FAIL, "Button link is not clicked successfully");
+            test.log(Status.INFO, "An exception occurred ");
+            //test.log(Status.INFO, e.printStackTrace());
+        }
+
+
     }
 }
