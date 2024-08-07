@@ -1,4 +1,4 @@
-import Utils.ReportUtil;
+import ExtentReport.ExtentReportManager;
 import com.aventstack.extentreports.Status;
 import org.testng.annotations.Test;
 
@@ -9,25 +9,20 @@ public class HomePageTest extends BaseTest {
     public void clickButtonWithID() throws InterruptedException {
         try {
             hm.clickButtonWithID();
-            test.log(Status.PASS, "Clicked the ID button successfully");
+            ExtentReportManager.getTest().log(Status.PASS, "Button with ID clicked successfully");
         } catch (Exception e) {
-            test.log(Status.FAIL, "Button is not clicked successfully");
-            test.log(Status.INFO, "An exception occurred ");
+            ExtentReportManager.getTest().log(Status.FAIL, "Button with ID clicked unsuccessfully");
         }
-
     }
+
 
     @Test(testName = "Click Button with link")
     public void clickButtonWithLink() {
         try {
             hm.clickButtonWithLinkText();
-            test.log(Status.PASS, "Clicked the link successfully");
+            ExtentReportManager.getTest().log(Status.PASS, "Button with link clicked successfully");
         } catch (Exception e) {
-            test.log(Status.FAIL, "Button link is not clicked successfully");
-            test.log(Status.INFO, "An exception occurred ");
-            //test.log(Status.INFO, e.printStackTrace());
+            ExtentReportManager.getTest().log(Status.PASS, "Button with link clicked unsuccessfully");
         }
-
-
     }
 }

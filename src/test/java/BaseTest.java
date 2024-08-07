@@ -1,5 +1,6 @@
 import Constants.Environment;
 import DriverFactory.Driver;
+import ExtentReport.ExtentReportManager;
 import Pages.HomePage;
 import Properties.Prop;
 import com.aventstack.extentreports.ExtentReports;
@@ -22,44 +23,32 @@ public class BaseTest {
     Driver d;
     HomePage hm;
 
-    ExtentReports report;
-    ExtentTest test;
+    //ExtentReportManager erm;
+    ExtentReports extentReports;
 
-    public ExtentSparkReporter extentSparkReporter;
-
-    @BeforeTest
-    public void startReporter() {
-        report = new ExtentReports();
-        extentSparkReporter = new ExtentSparkReporter("Reports/ExtentReport.html");
-        report.attachReporter(extentSparkReporter);
-        extentSparkReporter.config().setDocumentTitle("Automation Report");
-        extentSparkReporter.config().setReportName("Regression Report");
-        extentSparkReporter.config().setTheme(Theme.STANDARD);
-        extentSparkReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
-        test = report.createTest("Test Case 1");
-    }
-
+    ExtentTest extentTest;
 
     @BeforeMethod
-    public void initSetUp() throws IOException {
+    public void initSetUp(ITestResult result) throws IOException {
         p = new Prop();
         d = new Driver();
         driver = d.launchBrowser(p.getBrowserValue());
         driver.get(p.getAppUrl(Environment.DEV));
         hm = new HomePage(driver);
+        extentReports = ExtentReportManager.getExtentReportInstance();
+        extentTest = ExtentReportManager.setTest(result.getMethod().getMethodName());
         System.out.println("BeforeMethod is successfully executed");
     }
 
     @AfterMethod
     public void tearDown() {
         d.closeBrowser();
-
-        System.out.println("BeforeMethod is successfully executed");
+        System.out.println("AfterMethod is successfully executed");
     }
 
-    @AfterClass
-    public void reportFlush()
-    {
-        report.flush();
+    @AfterSuite
+    public void flushReport() {
+        ExtentReportManager.endReport();
+        System.out.println("AfterSuite is successfully executed");
     }
 }
