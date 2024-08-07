@@ -4,7 +4,6 @@ import Constants.Report;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentReportManager {
     static ExtentReports report;
@@ -20,6 +19,7 @@ public class ExtentReportManager {
             extentSparkReporter.config().setReportName(Report.REPORT_NAME);
             extentSparkReporter.config().setTheme(Report.DEFAULT_THEME);
             extentSparkReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
+
         }
         return report;
     }
