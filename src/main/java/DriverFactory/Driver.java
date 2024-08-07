@@ -31,4 +31,12 @@ public class Driver {
             System.out.println("driver is null");
         }
     }
+
+    public void quitBrowser() {
+        if (driver != null) {
+            driver.quit();
+        } else {
+            System.out.println("driver is null");
+        }
+    }
 }

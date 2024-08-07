@@ -22,33 +22,56 @@ public class BaseTest {
     Prop p;
     Driver d;
     HomePage hm;
-
-    //ExtentReportManager erm;
     ExtentReports extentReports;
-
     ExtentTest extentTest;
 
-    @BeforeMethod
-    public void initSetUp(ITestResult result) throws IOException {
+    @BeforeSuite
+    public void Test() {
+        System.out.println("Before suite is executed successfully");
+    }
+
+    @BeforeTest
+    public void Test1() {
+        System.out.println("Before test is executed successfully");
+    }
+
+    @AfterTest
+    public void Test2() {
+        System.out.println("After test is executed successfully");
+    }
+
+    @BeforeClass
+    public void initSetUp() throws IOException {
         p = new Prop();
         d = new Driver();
+        extentReports = ExtentReportManager.getExtentReportInstance();
         driver = d.launchBrowser(p.getBrowserValue());
         driver.get(p.getAppUrl(Environment.DEV));
         hm = new HomePage(driver);
-        extentReports = ExtentReportManager.getExtentReportInstance();
+        System.out.println("Before class is executed");
+    }
+
+    @BeforeMethod
+    public void initSetUp(ITestResult result) {
         extentTest = ExtentReportManager.setTest(result.getMethod().getMethodName());
         System.out.println("BeforeMethod is successfully executed");
     }
 
     @AfterMethod
+    public void Test3() {
+        System.out.println("AfterMethod is successfully executed");
+    }
+
+    @AfterClass
     public void tearDown() {
         d.closeBrowser();
-        System.out.println("AfterMethod is successfully executed");
+        System.out.println("AfterClass is successfully executed");
     }
 
     @AfterSuite
     public void flushReport() {
         ExtentReportManager.endReport();
+        d.quitBrowser();
         System.out.println("AfterSuite is successfully executed");
     }
 }

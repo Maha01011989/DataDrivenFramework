@@ -10,8 +10,11 @@ public class HomePageTest extends BaseTest {
         try {
             hm.clickButtonWithID();
             ExtentReportManager.getTest().log(Status.PASS, "Button with ID clicked successfully");
+            hm.navigateToHomePage();
+            ExtentReportManager.getTest().log(Status.INFO, "Navigated back to Home page");
         } catch (Exception e) {
             ExtentReportManager.getTest().log(Status.FAIL, "Button with ID clicked unsuccessfully");
+            ExtentReportManager.getTest().log(Status.FAIL, e.getMessage());
         }
     }
 
@@ -22,7 +25,8 @@ public class HomePageTest extends BaseTest {
             hm.clickButtonWithLinkText();
             ExtentReportManager.getTest().log(Status.PASS, "Button with link clicked successfully");
         } catch (Exception e) {
-            ExtentReportManager.getTest().log(Status.PASS, "Button with link clicked unsuccessfully");
+            ExtentReportManager.getTest().log(Status.FAIL, "Button with link clicked unsuccessfully");
+            ExtentReportManager.getTest().log(Status.FAIL, e.getMessage());
         }
     }
 }

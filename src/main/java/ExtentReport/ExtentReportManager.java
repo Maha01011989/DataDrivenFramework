@@ -1,5 +1,6 @@
 package ExtentReport;
 
+import Constants.Report;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
@@ -13,11 +14,11 @@ public class ExtentReportManager {
     public static ExtentReports getExtentReportInstance() {
         if (report == null) {
             report = new ExtentReports();
-            extentSparkReporter = new ExtentSparkReporter("Reports/ExtentReport.html");
+            extentSparkReporter = new ExtentSparkReporter(Report.REPORT_FOLDER);
             report.attachReporter(extentSparkReporter);
-            extentSparkReporter.config().setDocumentTitle("Automation Report");
-            extentSparkReporter.config().setReportName("Regression Report");
-            extentSparkReporter.config().setTheme(Theme.STANDARD);
+            extentSparkReporter.config().setDocumentTitle(Report.REPORT_TITLE);
+            extentSparkReporter.config().setReportName(Report.REPORT_NAME);
+            extentSparkReporter.config().setTheme(Report.DEFAULT_THEME);
             extentSparkReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
         }
         return report;

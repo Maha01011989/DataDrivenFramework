@@ -40,10 +40,9 @@ public class HomePage {
         elementUtil.doClick(buttonLink);
         System.out.println("button with Link is clicked");
     }
-    public void navigateToHomePage() {
+
+    public void navigateToHomePage() throws InterruptedException {
         driver.navigate().back();
+        Thread.sleep((5000));
     }
-
-
-
 }
