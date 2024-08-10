@@ -39,14 +39,14 @@ public class BaseTest {
         p = new Prop();
         d = new Driver();
         extentReports = ExtentReportManager.getExtentReportInstance();
-        driver = d.launchBrowser(p.getBrowserValue());
-        driver.get(p.getAppUrl(Environment.DEV));
-        hm = new HomePage(driver);
         System.out.println("Before class is executed");
     }
 
     @BeforeMethod
     public void initSetUp(ITestResult result) {
+        driver = d.launchBrowser(p.getBrowserValue());
+        driver.get(p.getAppUrl(Environment.DEV));
+        hm = new HomePage(driver);
         extentTest = ExtentReportManager.setTest(result.getMethod().getMethodName());
         System.out.println("BeforeMethod is successfully executed");
     }
