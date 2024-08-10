@@ -53,12 +53,13 @@ public class BaseTest {
 
     @AfterMethod
     public void Test3() {
+        d.closeBrowser();
         System.out.println("AfterMethod is successfully executed");
     }
 
     @AfterClass
     public void tearDown() {
-        d.closeBrowser();
+        // d.closeBrowser();
         System.out.println("AfterClass is successfully executed");
     }
 
