@@ -66,7 +66,7 @@ public class BaseTest {
     @AfterSuite
     public void flushReport() {
         ExtentReportManager.endReport();
-        d.quitBrowser();
+       // d.quitBrowser();
         System.out.println("AfterSuite is successfully executed");
     }
 }
