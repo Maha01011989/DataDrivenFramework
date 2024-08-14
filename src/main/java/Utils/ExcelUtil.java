@@ -6,6 +6,7 @@ import org.apache.poi.ss.usermodel.*;
 
 
 import java.io.*;
+import java.util.Arrays;
 
 class ExcelUtil {
 
@@ -17,44 +18,59 @@ class ExcelUtil {
     Sheet sheet;
     Row row;
 
+    Cell cell;
 
-    ExcelUtil() throws IOException {
+
+    ExcelUtil(String sheetName) throws IOException {
         fis = new FileInputStream(Excel.TESTDATA_FOLDER);
         wb = WorkbookFactory.create(fis);
-
+        sheet = wb.getSheet(sheetName);
     }
 
-//        for (int i = firstRow; i < rowCount; i++) {
-//            Row row = sheet.getRow(i);
-//            for (int j = row.getFirstCellNum(); j < row.getLastCellNum(); j++) {
-//                Cell cell = row.getCell(j);
-//                System.out.println(cell);
-//            }
-//        }
-
-
-    public int getRowCount(String sheetName) {
-        sheet = wb.getSheet(sheetName);
+    public int getRowCount() {
         rowCount = sheet.getLastRowNum();
         return rowCount;
     }
 
-    public int getColCount(String sheetName) {
-        sheet = wb.getSheet(sheetName);
+    public int getColCount() {
         row = sheet.getRow(0);
         colCount = row.getLastCellNum();
         return colCount;
     }
 
+
+    public Object[] getFirstColTestData() {
+        Object[] data = new Object[getRowCount()];
+        for (int i = 0; i < getRowCount(); i++) {
+            row = sheet.getRow(i);
+            cell = row.getCell(row.getFirstCellNum());
+            data[i] = cell.toString();
+        }
+        return data;
+    }
+
+    public Object[] getLastColTestData() {
+        Object[] data = new Object[getRowCount()];
+        for (int i = 0; i < getRowCount(); i++) {
+            row = sheet.getRow(i);
+            cell = row.getCell(row.getLastCellNum() - 1);
+            data[i] = cell.toString();
+        }
+        return data;
+    }
+
+
     public static void main(String[] args) throws IOException {
 
-        ExcelUtil eu = new ExcelUtil();
-        System.out.println(eu.getRowCount("Sheet1"));
-        System.out.println(eu.getColCount("Sheet1"));
-
+        ExcelUtil eu = new ExcelUtil("Sheet1");
+        System.out.println(eu.getRowCount());
+        System.out.println(eu.getColCount());
+        System.out.println(Arrays.toString(eu.getFirstColTestData()));
+        System.out.println(Arrays.toString(eu.getLastColTestData()));
 
     }
 }
+
 
 
 
